@@ -1,0 +1,58 @@
+#
+# Webliographer command file
+#
+
+# Instructions:
+#		* Command format is:
+				Command Name
+				Parameter1
+				Parameter2
+				...
+				ParameterN
+# 	* Put commands to be executed in order between ExecuteStart and ExecuteEnd.
+# 	* Put commands to save for later between LibraryStart and LibraryEnd.
+# 	* Use relative links to refer to input and output paths.
+#
+# 	To process this file, just run Webliographer.exe.
+
+# ----------------------------------------------------------------------------------------------------
+# Put commands to be executed in this section
+# ----------------------------------------------------------------------------------------------------
+$ ExecuteStart
+
+# Command execution order:
+# 	Convert everything to Webliographer TSV format
+#			processmd for Markdown files
+#			expandtsv for minimal TSV files (created manually)
+# 	Convert JSON to Webliographer TSV, and merge TSVs into a single master Webliographer TSV: processdirectories
+
+# Extract links from a Markdown file and write to a file in minimal TSV format (Title, Link)
+processmd
+..\..\..\..\GitHub\awesome-competitive-programming\README.md
+..\..\Input\SearchResults\awesomelist-links.tsv
+
+# Expand a minimal TSV (e.g., from manual results) into a TSV in Webliographer format
+expandtsv
+..\..\Input\SearchResults\google-manual-with-duplicates.tsv
+..\..\Input\0-cpresults-google-manualdup.011118.tsv
+
+expandtsv
+..\..\Input\SearchResults\awesomelist-links.tsv
+..\..\Input\9-awesomelist-011218.tsv
+
+
+# Merge all TSV files in an input directory and write them to a master TSV in an output directory
+processdirectories
+..\..\Input
+..\..\Output
+
+# ----------------------------------------------------------------------------------------------------
+$ ExecuteEnd
+# ----------------------------------------------------------------------------------------------------
+
+
+# Everything in this section will be ignored. Use it to store commands for reference.
+# To run commands in this section, copy it to the ExecuteStart section.
+$ LibraryStart
+
+$ LibraryEnd
